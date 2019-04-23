@@ -1,3 +1,5 @@
+# autolight
+Arduino auto-adjusting lightbulb.
 Status: work in progress, not fully functional yet.
 
 ## What is it?
