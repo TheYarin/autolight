@@ -1,7 +1,7 @@
 # autolight
 Arduino auto-adjusting lightbulb.
 
-Status: a work in progress, not fully functional yet.
+<b>Status</b>: a work in progress, not fully functional yet.
 
 ## What is it?
 A lightbulb that adjusts the room's brightness to a user-defined level and only lights up when human presence exists.
