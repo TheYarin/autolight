@@ -1,13 +1,21 @@
-#include <RBDdimmer.h>
+#include "Lamp.h"
 
-#include "Lamp.h";
+Lamp::Lamp(int outputPin)
+    : dimmer(outputPin)
+{
+  //TEMP   Serial.println("Lamp 2!");
+}
 
-Lamp::Lamp(int outputPin, int zciPin)
-  : dimmer(outputPin, zciPin) {
+void Lamp::setup()
+{
   dimmer.begin(NORMAL_MODE, ON);
 }
 
-void Lamp::setIntensity(int intensity) {
+void Lamp::setIntensity(int intensity)
+{
+  //TEMP   Serial.print("Lamp requested: ");
+  //TEMP   Serial.println(intensity);
+
   int intensityToSet = intensity;
 
   if (intensity > MAX_INTENSITY)
@@ -15,31 +23,47 @@ void Lamp::setIntensity(int intensity) {
   else if (intensity < MIN_INTENSITY)
     intensityToSet = MIN_INTENSITY;
 
-  if (intensityToSet != this->getCurrentIntensity()) {
-    Serial.print("Lamp set: ");
-    Serial.print(this->getCurrentIntensity());
-    Serial.print(" ");
-    Serial.println(intensityToSet);
+  int currentIntensity = this->getCurrentIntensity();
+
+  // if (intensityToSet != currentIntensity)
+  // if (intensityToSet == MIN_INTENSITY)
+  //   this->dimmer.setState(OFF);
+  // else
+  //   this->dimmer.setState(ON);
+
+  // if (true)
+
+  if (intensityToSet != currentIntensity)
+  {
+    //TEMP     Serial.print("Lamp old: ");
+    //TEMP     Serial.print(currentIntensity);
+    //TEMP     Serial.print(" new: ");
+    //TEMP     Serial.println(intensityToSet);
     this->dimmer.setPower(intensityToSet);
   }
 }
 
-int Lamp::getCurrentIntensity() {
+int Lamp::getCurrentIntensity()
+{
   return this->dimmer.getPower();
 }
 
-void Lamp::brighter() {
+void Lamp::brighter()
+{
   this->setIntensity(this->getCurrentIntensity() + INTENSITY_STEP);
 }
 
-void Lamp::darker() {
+void Lamp::darker()
+{
   this->setIntensity(this->getCurrentIntensity() - INTENSITY_STEP);
 }
 
-void Lamp::max() {
+void Lamp::maxPower()
+{
   this->setIntensity(MAX_INTENSITY);
 }
 
-void Lamp::off() {
+void Lamp::off()
+{
   this->setIntensity(MIN_INTENSITY);
 }

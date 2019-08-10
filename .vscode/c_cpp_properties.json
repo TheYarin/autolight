@@ -8,7 +8,7 @@
                 "C:/Users/Yarin/AppData/Local/Arduino15/packages/esp8266/hardware/esp8266/2.5.0/variants"
             ],
             "forcedInclude": [],
-            "intelliSenseMode": "msvc-x64",
+            "intelliSenseMode": ,
             "compilerPath": "/usr/bin/gcc",
             "cppStandard": "c++17"
         }

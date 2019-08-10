@@ -1,22 +1,23 @@
 #include <Arduino.h>
 #include <RBDdimmer.h>
 
-class Lamp {
+class Lamp
+{
 public:
-  Lamp(int outputPin, int zciPin);
+  Lamp(int outputPin);
+  void setup(); // Must be called at setup()!
   void brighter();
   void darker();
-  void max();
+  void maxPower();
   void off();
 
 private:
-  const int MAX_INTENSITY = 99;
-  const int MIN_INTENSITY = 7; // Anything lower than that results in flickering or max brightness
+  const int MAX_INTENSITY = 100;
+  const int MIN_INTENSITY = 0; // Anything lower than that results in flickering or unpredictable behaviour
   const int INTENSITY_STEP = 1;
 
-  int lightIntensity = -1;
   dimmerLamp dimmer;
-  
+
   void setIntensity(int intensity);
   int getCurrentIntensity();
 };

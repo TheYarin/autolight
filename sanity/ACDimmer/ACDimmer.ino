@@ -1,8 +1,9 @@
 #include <RBDdimmer.h>
 
-dimmerLamp dimmer(D12, D3);
+dimmerLamp dimmer(12);
 
-void setup() {
+void setup()
+{
   Serial.begin(115200);
   delay(50);
   Serial.println("setup");
@@ -13,41 +14,69 @@ void setup() {
   //pinMode(D13, OUTPUT);
 }
 
+void loop()
+{
+  // playWithGetPower();
+  readAndSet();
+}
+
+void playWithGetPower()
+{
+  dimmer.setPower(0);
+
+  while (true)
+  {
+    int temp1 = dimmer.getPower();
+
+    Serial.println(temp1);
+  }
+}
+
 int power = 0;
-void loop() {
+void readAndSet()
+{
   Serial.println("loop!");
+  delay(50);
   //for (int i = 0; i < 103; i++) {
   int i = 0;
-  
-  while (i != -1) {
+
+  while (i != -111)
+  {
     Serial.print("power: ");
     Serial.println(i);
     dimmer.setPower(i);
     Serial.println(i);
-    while (!Serial.available()); // wait for serial
+    while (!Serial.available())
+      ; // wait for serial
     i = Serial.parseInt();
   }
 
+  Serial.println("loop end");
   return;
   Serial.println("power: 1");
   dimmer.setPower(1);
-  while (!Serial.available()); // wait for serial
+  while (!Serial.available())
+    ; // wait for serial
   Serial.readString();
   Serial.println("power: 2");
   dimmer.setPower(2);
-  while (!Serial.available()); // wait for serial
+  while (!Serial.available())
+    ; // wait for serial
   Serial.readString();
   Serial.println("power: 50");
   dimmer.setPower(50);
-  while (!Serial.available()); // wait for serial
+  while (!Serial.available())
+    ; // wait for serial
   Serial.readString();
   Serial.println("power: 99");
   dimmer.setPower(99);
-  while (!Serial.available()); // wait for serial
+  while (!Serial.available())
+    ; // wait for serial
   Serial.readString();
   Serial.println("power: 100");
   dimmer.setPower(100);
-  while (!Serial.available()); // wait for serial
+  while (!Serial.available())
+    ; // wait for serial
   Serial.readString();
   return;
   //dimmer.setState(ON);

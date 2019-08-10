@@ -1,6 +1,5 @@
 #include <Arduino.h>
 //#include <d1/pins_arduino.h>
-#include <RBDdimmer.h>
 
 #include "OperationStatus.h"
 #include "HumanPresenceDetector.h"
@@ -8,22 +7,25 @@
 #include "DesiredBrightnessReader.h"
 #include "Lamp.h"
 
-OperationStatus operationStatus;
-Lamp lamp(D12, D3);
-HumanPresenceDetector humanPresenceDetector(D5);
+OperationStatus operationStatus(5);
+Lamp lamp(12);
+HumanPresenceDetector humanPresenceDetector(7);
 RoomBrightnessDetector roomBrightnessDetector(A0);
-DesiredBrightnessReader desiredBrightnessReader(A0);
+DesiredBrightnessReader desiredBrightnessReader(A1);
 
-void setup() {
+void setup()
+{
   Serial.begin(115200);
-  Serial.println("Hello!");
+  lamp.setup();
+  //TEMP   Serial.println("SETUP");
 }
 
-void autoAdjustIntensity() {
+void autoAdjustIntensity()
+{
   int roomBrightness = roomBrightnessDetector.getRoomBrightness();
   int desiredBrightness = desiredBrightnessReader.get();
 
-  if (abs(desiredBrightness - roomBrightness) < 50)
+  if (abs(desiredBrightness - roomBrightness) < 20)
     return;
 
   if (roomBrightness < desiredBrightness)
@@ -32,19 +34,21 @@ void autoAdjustIntensity() {
     lamp.darker();
 }
 
-void loop() {
+void loop()
+{
   //Serial.println(desiredBrightnessReader.get());
-  Serial.println(roomBrightnessDetector.getRoomBrightness());
+  //Serial.println(roomBrightnessDetector.getRoomBrightness());
 
-  if (!humanPresenceDetector.humanPresenceDetected()) {
+  if (!humanPresenceDetector.humanPresenceDetected())
+  {
     lamp.off();
-
-    return;
   }
+  else
+  {
+    int currentOperationStatus = operationStatus.read();
 
-  int currentOperationStatus = operationStatus.read();
-
-  switch (currentOperationStatus) {
+    switch (currentOperationStatus)
+    {
     case OperationStatus::OFF:
       lamp.off();
       break;
@@ -52,18 +56,21 @@ void loop() {
       autoAdjustIntensity();
       break;
     case OperationStatus::ON:
-      lamp.max();
+      lamp.maxPower();
       break;
-    default: {
-        //throw new Exception();
-      }
+    default:
+      //TEMP       Serial.print("currentOperationStatus is out of range: ");
+      //TEMP       Serial.println(currentOperationStatus);
+      break;
+    }
   }
-  //  delay(10);
 
-  digitalWrite(D13, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(10);                       // wait for a second
-  digitalWrite(D13, LOW);    // turn the LED off by making the voltage LOW
-  delay(10);                       // wait for a second
+  delay(10);
+
+  //digitalWrite(D13, HIGH); // turn the LED on (HIGH is the voltage level)
+  // delay(10); // wait for a second
+  //digitalWrite(D13, LOW);  // turn the LED off by making the voltage LOW
+  // delay(10); // wait for a second
   //
   //
   //  digitalWrite(D13, HIGH);   // turn the LED on (HIGH is the voltage level)
@@ -93,5 +100,4 @@ void loop() {
   //  digitalWrite(D13, LOW);    // turn the LED off by making the voltage LOW
   //
   //  delay(1500);
-
 }
