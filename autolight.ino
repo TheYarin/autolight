@@ -41,7 +41,7 @@ void loop()
 
   if (!humanPresenceDetector.humanPresenceDetected())
   {
-    lamp.off();
+    lamp.darker();
   }
   else
   {
@@ -50,13 +50,13 @@ void loop()
     switch (currentOperationStatus)
     {
     case OperationStatus::OFF:
-      lamp.off();
+      lamp.darker();
       break;
     case OperationStatus::AUTO:
       autoAdjustIntensity();
       break;
     case OperationStatus::ON:
-      lamp.maxPower();
+      lamp.brighter();
       break;
     default:
       //TEMP       Serial.print("currentOperationStatus is out of range: ");
