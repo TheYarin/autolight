@@ -8,7 +8,7 @@
 #include "Lamp.h"
 
 OperationStatus operationStatus(5);
-Lamp lamp(12);
+Lamp lamp(8);
 HumanPresenceDetector humanPresenceDetector(7);
 RoomBrightnessDetector roomBrightnessDetector(A0);
 DesiredBrightnessReader desiredBrightnessReader(A1);
