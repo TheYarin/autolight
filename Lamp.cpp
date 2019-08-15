@@ -8,6 +8,7 @@ Lamp::Lamp(int outputPin)
 
 void Lamp::setup()
 {
+  this->dimmer.setPower(MIN_INTENSITY); // To prevent the lamp from turning on by default when the whole thing is connected to a power source
   dimmer.begin(NORMAL_MODE, ON);
 }
 
