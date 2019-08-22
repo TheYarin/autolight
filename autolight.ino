@@ -1,5 +1,4 @@
 #include <Arduino.h>
-//#include <d1/pins_arduino.h>
 
 #include "OperationStatus.h"
 #include "HumanPresenceDetector.h"
@@ -17,7 +16,6 @@ void setup()
 {
   Serial.begin(115200);
   lamp.setup();
-  //TEMP   Serial.println("SETUP");
 }
 
 void autoAdjustIntensity()
@@ -36,9 +34,6 @@ void autoAdjustIntensity()
 
 void loop()
 {
-  //Serial.println(desiredBrightnessReader.get());
-  //Serial.println(roomBrightnessDetector.getRoomBrightness());
-
   if (!humanPresenceDetector.humanPresenceDetected())
   {
     lamp.darker();
@@ -59,45 +54,9 @@ void loop()
       lamp.brighter();
       break;
     default:
-      //TEMP       Serial.print("currentOperationStatus is out of range: ");
-      //TEMP       Serial.println(currentOperationStatus);
       break;
     }
   }
 
   delay(10);
-
-  //digitalWrite(D13, HIGH); // turn the LED on (HIGH is the voltage level)
-  // delay(10); // wait for a second
-  //digitalWrite(D13, LOW);  // turn the LED off by making the voltage LOW
-  // delay(10); // wait for a second
-  //
-  //
-  //  digitalWrite(D13, HIGH);   // turn the LED on (HIGH is the voltage level)
-  //  delay(100);                       // wait for a second
-  //  digitalWrite(D13, LOW);
-
-  //  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  //  delay(100);                       // wait for a second
-  //  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-  //  delay(100);                       // wait for a second
-  //
-  //
-  //  digitalWrite(D13, HIGH);   // turn the LED on (HIGH is the voltage level)
-  //  delay(100);                       // wait for a second
-  //  digitalWrite(D13, LOW);    // turn the LED off by making the voltage LOW
-  //  delay(100);
-  //
-  //
-  //  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  //  delay(100);                       // wait for a second
-  //  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-  //  delay(100);                       // wait for a second
-  //
-  //
-  //  digitalWrite(D13, HIGH);   // turn the LED on (HIGH is the voltage level)
-  //  delay(100);                       // wait for a second
-  //  digitalWrite(D13, LOW);    // turn the LED off by making the voltage LOW
-  //
-  //  delay(1500);
 }

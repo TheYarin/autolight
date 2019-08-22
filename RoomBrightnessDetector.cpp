@@ -13,8 +13,5 @@ int RoomBrightnessDetector::getRoomBrightness()
 {
     int val = analogRead(this->inputPin);
 
-//TEMP     Serial.print("Room brightness: ");
-//TEMP     Serial.println(val);
-
     return val;
 }

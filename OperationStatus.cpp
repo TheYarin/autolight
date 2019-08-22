@@ -25,8 +25,6 @@ int OperationStatus::read()
     return OperationStatus::ON;
   default:
   {
-    //TEMP     Serial.print("Invalid Toggle value: ");
-    //TEMP     Serial.println(analogReadVal);
     return OperationStatus::OFF;
   }
   }

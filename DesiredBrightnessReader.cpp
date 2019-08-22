@@ -9,11 +9,9 @@ DesiredBrightnessReader::DesiredBrightnessReader(int inputPin)
   this->inputPin = inputPin;
 }
 
-// Heuristically returns values between 5 and 1024
 int DesiredBrightnessReader::get()
 {
   int val = analogRead(this->inputPin);
-//TEMP   Serial.print("Desired brightness level: ");
-//TEMP   Serial.println(val);
+  
   return val;
 }

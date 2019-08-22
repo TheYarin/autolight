@@ -2,9 +2,7 @@
 
 Lamp::Lamp(int outputPin)
     : dimmer(outputPin)
-{
-  //TEMP   Serial.println("Lamp 2!");
-}
+{ }
 
 void Lamp::setup()
 {
@@ -14,9 +12,6 @@ void Lamp::setup()
 
 void Lamp::setIntensity(int intensity)
 {
-  //TEMP   Serial.print("Lamp requested: ");
-  //TEMP   Serial.println(intensity);
-
   int intensityToSet = intensity;
 
   if (intensity > MAX_INTENSITY)
@@ -26,22 +21,8 @@ void Lamp::setIntensity(int intensity)
 
   int currentIntensity = this->getCurrentIntensity();
 
-  // if (intensityToSet != currentIntensity)
-  // if (intensityToSet == MIN_INTENSITY)
-  //   this->dimmer.setState(OFF);
-  // else
-  //   this->dimmer.setState(ON);
-
-  // if (true)
-
   if (intensityToSet != currentIntensity)
-  {
-    //TEMP     Serial.print("Lamp old: ");
-    //TEMP     Serial.print(currentIntensity);
-    //TEMP     Serial.print(" new: ");
-    //TEMP     Serial.println(intensityToSet);
     this->dimmer.setPower(intensityToSet);
-  }
 }
 
 int Lamp::getCurrentIntensity()

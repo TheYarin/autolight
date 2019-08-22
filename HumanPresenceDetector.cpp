@@ -12,8 +12,6 @@ bool HumanPresenceDetector::humanPresenceDetected()
 {
     int val = digitalRead(this->inputPin); // Should be 0 (LOW) if no presence is detected or 1 (HIGH) if presence detected
     bool presenceDetected = (val == HIGH);
-//TEMP     Serial.print("Human presence: ");
-//TEMP     Serial.println(presenceDetected);
 
     return presenceDetected;
 }
